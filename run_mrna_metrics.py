@@ -1,0 +1,25 @@
+from mrna import *
+name = sys.argv[1].split('.')[0]
+print(name)
+Z = rna_metrics(sys.argv[1])
+print("Using EternaFold")
+print("Sequence:")
+print(Z.seq)
+print("CAI:")
+print(Z.CAI())
+print("MFE:")
+print(Z.arnie_free_energy())
+print("AUP:")
+print(Z.average_unpaired_probability())
+print("UP calculation:")
+np.save(name,Z.unpaired_probability())
+print("MFE structure:")
+print(Z.mfe_structure())
+print("Degscore and t1/2:")
+print(Z.deg_score())
+
+plt.figure(figsize=(8,6))
+sns.heatmap(Z.base_pair_matrix(), cmap='hot_r')
+plt.title('Base Pairing Probability-'+name)
+plt.savefig(name+'.png',dpi=300)
+
